@@ -1,0 +1,43 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
+<head>
+<title>Record store</title>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+</head>
+
+
+
+<body>
+	<div class="col-md-4">
+		<h3 th:inline="text">Logged in:
+			[[${#httpServletRequest.remoteUser}]]</h3>
+	</div>
+	<div class="col-md-4" style="padding: 20px 0">
+		<form th:action="@{/logout}" method="post">
+			<input type="submit" value="Kirjaudu ulos" />
+		</form>
+	</div>
+	<h1>Recordlist</h1>
+	<table style="width: 50%;" border="5" cellpadding="3">
+		<tr>
+			<th>Album name</th>
+			<th>Artist</th>
+			<th>Released</th>
+			<th>Price</th>
+			<th sec:authorize="hasRole('ADMIN')"></th>
+
+
+		</tr>
+		<tr th:each="record : ${records}">
+			<td th:text="${record.title}"></td>
+			<td th:text="${record.artist}"></td>
+			<td th:text="${record.year}"></td>
+			<td th:text="${record.price}"></td>
+			<td sec:authorize="hasAuthority('ADMIN')">
+			<a th:href="@{/delete/{id}(id=${record.id})}"><input type="submit" value="Remove" /></a></td>
+		</tr>
+	</table>
+	<a href="/add"><input type="submit" value="Lisää" /></a>
+</body>
+</html>

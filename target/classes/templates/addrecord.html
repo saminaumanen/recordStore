@@ -1,0 +1,36 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<title>Recordlist.</title>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+</head>
+<style>
+
+    label{display: inline-block;
+    width: 7em;}
+    label[for=viesti]{vertical-align: top;}
+  
+</style>
+
+<body>
+	<h1>Lisää kirjoja</h1>
+	<div>
+		<form th:object="${record}" th:action="@{save}" action="#" method="post">
+			<label for="title">Album name</label> <input type="text" id="title"
+				th:field="*{title}" />
+			<div style="clear: both; display: block; height: 10px;"></div>
+			<label for="artist">Artist</label> <input type="text" id="artist"
+				th:field="*{artist}" />
+			<div style="clear: both; display: block; height: 10px;"></div>
+			<label for="year">Release year</label> <input type="text" id="year"
+				th:field="*{year}" />
+			<div style="clear: both; display: block; height: 10px;"></div>
+			<div style="clear: both; display: block; height: 10px;"></div>
+			<label for="price">Price</label> <input type="text" id="price"
+				th:field="*{price}" />
+			<div style="clear: both; display: block; height: 10px;"></div>
+			<input type="submit" value="Save"></input>
+		</form>
+	</div>
+</body>
+</html>

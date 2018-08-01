@@ -35,7 +35,7 @@ public class RecordStoreApplication {
 			urepository.save(user2);
 			 
 			 
-			log.info("haetaan kaikki kirjat");
+			log.info("find all");
 			for (Record record : repository.findAll()) {
 				log.info(record.toString());
 			}

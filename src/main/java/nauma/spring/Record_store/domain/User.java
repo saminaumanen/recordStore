@@ -9,7 +9,6 @@ public class User {
     @Column(name = "id", nullable = false, updatable = false)
     private Long id;
 
-    // Uniikki käyttäjänimi
     @Column(name = "username", nullable = false, unique = true)
     private String username;
 

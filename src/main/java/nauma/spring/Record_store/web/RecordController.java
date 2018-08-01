@@ -22,7 +22,7 @@ public class RecordController {
 	@Autowired
 	private RecordRepository repository; 
 	
-    //Etusivu kirjalistalla 
+    //recordlist frontpage
     @RequestMapping(value="/")
     public String recordList2(Model model) {	
         model.addAttribute("records", repository.findAll());
@@ -30,47 +30,47 @@ public class RecordController {
     }
 
 	
-	//Login sivusto. @RequestMapping(value="/login")
+	//Login page @RequestMapping(value="/login")
     @RequestMapping(value="/login")
     public String login() {	
         return "login"; 
     }	
     
-    //Hakee kaikki kirjat.
+    //search all.
     @RequestMapping(value="/recordlist")
     public String recordList(Model model) {	
         model.addAttribute("records", repository.findAll());
         return "recordlist";
     }
     
-    //Tallennetaan uusi kirja
+    //save new
     @RequestMapping(value = "/add")
     public String addRecord(Model model){
     	model.addAttribute("record", new Record());
         return "addrecord";
     } 
     
-    //Poistetaan kirja ID:n perusteella, joka tulee urlin mukana.
+    //delete
     @RequestMapping(value = "/delete/{id}", method = RequestMethod.GET)
     public String deleteRecord(@PathVariable("id") Long Id, Model model) {
     	repository.delete(Id);
         return "redirect:../recordlist";
     }   
     
-    //Tallennetaan kirja
+    //save
     @RequestMapping(value = "/save", method = RequestMethod.POST)
     public String save(Record record){
         repository.save(record);
         return "redirect:recordlist";
     }        
     
-    //Haetaan kaikki kirjat repositorystä.
+    
     @RequestMapping(value="/records", method = RequestMethod.GET)
     public @ResponseBody List<Record> recordListRest() {	
         return (List<Record>) repository.findAll();
     }    
     
-	// Hae kirja ID:n perusteella, joka lähetetään osoiterivin kautta.
+	// search by id
     @RequestMapping(value="/record/{id}", method = RequestMethod.GET)
     public @ResponseBody Record findRecordRest(@PathVariable("id") Long Id) {	
     	return repository.findOne(Id);
